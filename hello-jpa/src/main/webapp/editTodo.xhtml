@@ -1,0 +1,26 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://xmlns.jcp.org/jsf/passthrough">
+    <h:head>
+        <title>Todo編集</title>
+        <link rel="stylesheet" href="common/skyblue.css" type="text/css"/>
+    </h:head>
+    <h:body>
+        <h:form>
+        <h:dataTable id="dtList" var="t" value="todoBean.entity" class="container">
+            <h:column>
+                <h:outputText value="#{todoBean.entity.todo}" class="text-center"/>
+                <h:inputText value="#{editTodoBean.updateTodo}" class="form-control" p:maxlength="40" p:placeholder="#{todoBean.entity.todo}"/>
+                <div class="error"><label><h:messages /></label></div>
+                <h:commandButton value="上書きする" action="#{editTodoBean.updateTodo()}" class="btn btn-sm btn-empty btn-dark">
+                    <f:setPropertyActionListener target="#{editTodoBean.id}" value="#{todoBean.id}" />
+                </h:commandButton>
+            </h:column>
+        </h:dataTable>
+        </h:form>
+    </h:body>
+</html>
+

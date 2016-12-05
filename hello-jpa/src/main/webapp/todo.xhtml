@@ -1,0 +1,54 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://xmlns.jcp.org/jsf/passthrough">
+    <h:head>
+        <title>Todoリスト</title>
+        <link rel="stylesheet" href="common/skyblue.css" type="text/css"/>
+    </h:head>
+    <h:body>
+       <h:form>
+           <!-- ***** 登録  ****** -->
+           <div align="center">
+           <h:outputLabel value="Todoを入力してください。"/>
+           <h:inputText value="#{todoBean.todo}" class="form-control" p:placeholder="(例)夕食の準備(40m)" p:maxlength="40"/>
+           <div class="error"><label><h:messages/></label></div>
+           <h:commandButton value="登録する" action="#{todoBean.addTodo()}" class="btn btn-sm btn-empty btn-dark"/>
+           </div>
+       </h:form>
+       <h:form>
+           <!-- ***** 検索  ****** -->
+           <div align="center">
+           <h:column>
+               <br /><h:outputLabel value="キーワードを入力して検索もできます。"/>
+               <h:inputText value="#{todoBean.searchWord}" class="form-control" />
+           <h:commandButton value="検索する" action="#{todoBean.searchTodo()}" class="btn btn-sm btn-empty btn-dark"/>
+           </h:column>
+           </div>
+       </h:form>
+       <h:form>
+           <!-- ***** 一覧  ****** -->
+           <div align="center">
+           <h:dataTable id="dtList" var="t" value="#{todoBean.listTodo}" class="table">
+               <h:column>
+                   <h:outputText value="#{t.todo}"/>&nbsp;
+                   <h:outputText value="#{t.createDate}"/>
+               </h:column>
+               <h:column>
+                   <h:commandButton value="✓" action="#{todoBean.deleteTodo()}" class="btn btn-sm btn-empty btn-warning">
+                   <f:setPropertyActionListener target="#{todoBean.id}" value="#{t.id}" />
+                   </h:commandButton>
+               </h:column>
+               <h:column>
+                   <h:commandButton value="上書きする" action="#{todoBean.moveEditScr()}" class="btn btn-sm btn-empty btn-dark">
+                   <f:setPropertyActionListener target="#{todoBean.id}" value="#{t.id}" />
+                   </h:commandButton>
+               </h:column>
+           </h:dataTable>
+           </div>
+       </h:form>
+    </h:body>
+</html>
+
